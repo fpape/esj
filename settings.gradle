@@ -1,0 +1,4 @@
+rootProject.name = 'esj'
+include ':client'
+
+project(':client').projectDir = "$rootDir/client" as File
