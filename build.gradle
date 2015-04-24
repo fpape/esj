@@ -1,6 +1,18 @@
-allprojects {
-    apply plugin: 'maven'
+buildscript {
+    repositories {
+        jcenter()
+    }
 
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
+    }
+}
+
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'bintray'
+
+allprojects {
     group = 'net.eventstore'
     version = '1.0.0'
 }
@@ -13,9 +25,38 @@ subprojects {
 
     repositories {
         mavenLocal()
-
+        jcenter()
         maven { url "http://repo.maven.apache.org/maven2" }
     }
 
+    task sourcesJar( type: Jar ) {
+        classifier 'sources'
+        from sourceSets.main.allSource
+    }
 
+    artifacts {
+        archives sourcesJar
+    }
+
+    publishing {
+        publications {
+            mavenJava( MavenPublication ) {
+                from components.java
+                artifact sourcesJar
+            }
+        }
+    }
+
+    bintray {
+        user = project.hasProperty( 'bintrayUser' ) ? project.getProperty( 'bintrayUser' ) : null
+        key = project.hasProperty( 'bintrayKey' ) ? project.getProperty( 'bintrayKey' ) : null
+        publications = ['mavenJava']
+
+        pkg {
+            repo = 'TBD'
+            name = 'TBD'
+            licenses = ['LGPL']
+        }
+    }
 }
+
