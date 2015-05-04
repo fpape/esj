@@ -8,13 +8,13 @@ buildscript {
     }
 }
 
-apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'bintray'
 
 allprojects {
-    group = 'net.eventstore'
-    version = '1.0.0'
+    apply plugin: 'maven'
+    group = 'net.eventstore.esj'
+    version = '1.0.0-SNAPSHOT'
 }
 
 subprojects {

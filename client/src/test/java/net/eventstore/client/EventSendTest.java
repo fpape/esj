@@ -28,12 +28,11 @@ import static org.junit.Assert.assertEquals;
 
 @Log4j
 
-@Ignore("not ready yet")
 @RunWith(JUnit4.class)
 public class EventSendTest {
 
     private final static String HOSTNAME = "127.0.0.1";
-    private final static int PORTNUMBER = 2113;
+    private final static int PORTNUMBER = 1113;
     private final static String STREAM_NAME = "teststream23";
     
     private final Semaphore processing = new Semaphore(0);
