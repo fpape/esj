@@ -13,7 +13,7 @@ apply plugin: 'bintray'
 
 allprojects {
     apply plugin: 'maven'
-    group = 'net.eventstore.esj'
+    group = 'net.eventstore'
     version = '1.1.0-SNAPSHOT'
 }
 
