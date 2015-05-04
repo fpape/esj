@@ -1,6 +1,17 @@
 package net.eventstore.client;
 
-import static org.junit.Assert.assertEquals;
+import com.google.protobuf.TextFormat.ParseException;
+import net.eventstore.client.model.Event;
+import net.eventstore.client.model.Message;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -8,28 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
-import net.eventstore.client.model.Event;
-import net.eventstore.client.model.Message;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.protobuf.TextFormat.ParseException;
-
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
-
 import static org.junit.Assert.assertEquals;
 
-@Log4j
 @RunWith(JUnit4.class)
 public class EventSendTest {
 
@@ -80,7 +71,7 @@ public class EventSendTest {
     }
 
     private void makeMessageTest(Object actual, Object expected,
-            boolean nullMessage) {
+                                 boolean nullMessage) {
         log.debug("Equals: {}", actual.equals(expected));
         assertEquals(actual, expected);
         if (nullMessage) {
@@ -124,7 +115,7 @@ public class EventSendTest {
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
         log.debug("Writing finished. Number of writes={} ({} successful, {} failed), duration={}",
-                        TOTAL_WRITES, successes, fails, duration);
+                TOTAL_WRITES, successes, fails, duration);
     }
 
     public static Event[] generateEvents() {
@@ -142,7 +133,7 @@ public class EventSendTest {
             events.add(e);
         }
 
-        return events.toArray(new Event[] {});
+        return events.toArray(new Event[]{});
     }
 
 }

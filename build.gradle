@@ -14,7 +14,7 @@ apply plugin: 'bintray'
 allprojects {
     apply plugin: 'maven'
     group = 'net.eventstore.esj'
-    version = '1.0.0-SNAPSHOT'
+    version = '1.1.0-SNAPSHOT'
 }
 
 subprojects {
@@ -45,6 +45,11 @@ subprojects {
                 artifact sourcesJar
             }
         }
+    }
+
+    configurations {
+        all*.exclude group: 'commons-logging'
+        all*.exclude group: 'log4j'
     }
 
     bintray {
